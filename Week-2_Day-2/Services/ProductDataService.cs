@@ -5,9 +5,10 @@ namespace Week_2_Day_2.Services
 {
     public class ProductDataService : IProductDataService
     {
-        public List<Product> GetProducts()
+        private readonly List<Product> _products;
+        public ProductDataService()
         {
-            return new List<Product>
+            _products = new List<Product>
             {
                 new Product { Id = 1, Name = "Laptop", Price = 799.99M },
                 new Product { Id = 2, Name = "Smartphone", Price = 499.99M },
@@ -20,6 +21,38 @@ namespace Week_2_Day_2.Services
                 new Product { Id = 9, Name = "Gaming Console", Price = 399.99M },
                 new Product { Id = 10, Name = "Wireless Earbuds", Price = 149.99M }
             };
+        }
+        public List<Product> GetProducts()
+        {
+            return _products.ToList();
+        }
+        public Product GetProductById(int id)
+        {
+            return _products.FirstOrDefault(p => p.Id == id)!;
+        }
+        public void AddProduct(Product product)
+        {
+            product.Id = _products.Max(p => p.Id) + 1;
+            _products.Add(product);
+        }
+        public void UpdateProduct(Product product)
+        {
+            var existingProduct = _products.FirstOrDefault(p => p.Id == product.Id);
+            if (existingProduct != null)
+            {
+                existingProduct.Name = product.Name;
+                existingProduct.Price = product.Price;
+            }
+        }
+
+        public bool DeleteProduct(int id)
+        {
+            var productToDelete = _products.FirstOrDefault(p => p.Id == id);
+            if (productToDelete != null)
+            {
+                _products.Remove(productToDelete);             
+            }
+            return true;
         }
     }
 }

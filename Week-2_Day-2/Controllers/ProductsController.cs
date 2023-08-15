@@ -68,11 +68,14 @@ namespace Week_2_Day_2.Controllers
             return View(product);
         }
 
-        [HttpGet]
-        public IActionResult Delete(int id)
+        public bool Delete(int id)
         {
-            _productRepository.DeleteProduct(id);
-            return RedirectToAction("Index");
+            bool isDeleted = _productRepository.DeleteProduct(id);
+            if(isDeleted)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
