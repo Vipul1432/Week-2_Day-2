@@ -8,9 +8,7 @@ namespace Week_2_Day_2.Repository
         private readonly IProductDataService _productContext;
         public ProductRepository(IProductDataService productContext)
         {
-
             _productContext = productContext;
-
         }
         public List<Product> GetAllProducts()
         {
@@ -19,32 +17,23 @@ namespace Week_2_Day_2.Repository
 
         public Product GetProductById(int id)
         {
-            return _productContext.GetProducts().FirstOrDefault(p => p.Id == id)!;
+            return _productContext.GetProductById(id);
         }
 
         public void AddProduct(Product product)
         {
-            product.Id = _productContext.GetProducts().Max(p => p.Id) + 1; 
-            _productContext.GetProducts().Add(product);
+            _productContext.AddProduct(product);
         }
 
         public void UpdateProduct(Product product)
         {
-            var existingProduct = _productContext.GetProducts().FirstOrDefault(p => p.Id == product.Id);
-            if (existingProduct != null)
-            {
-                existingProduct.Name = product.Name;
-                existingProduct.Price = product.Price;
-            }
+            _productContext.UpdateProduct(product);
         }
 
-        public void DeleteProduct(int id)
+        public bool DeleteProduct(int id)
         {
-            var product = _productContext.GetProducts().FirstOrDefault(p => p.Id == id);
-            if (product != null)
-            {
-                _productContext.GetProducts().Remove(product);
-            }
+           bool isDeleted = _productContext.DeleteProduct(id);
+           return isDeleted;
         }
     }
 }
