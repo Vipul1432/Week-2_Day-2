@@ -43,6 +43,7 @@ namespace Week_2_Day_2.Controllers
             if (ModelState.IsValid)
             {
                 _productRepository.AddProduct(product);
+                TempData["success"] = $"Product {product.Name} Added Successfully";
                 return RedirectToAction("Index");
             }
 
@@ -62,6 +63,7 @@ namespace Week_2_Day_2.Controllers
             if (ModelState.IsValid)
             {
                 _productRepository.UpdateProduct(product);
+                TempData["success"] = "Category Updated Successfully";
                 return RedirectToAction("Index");
             }
 

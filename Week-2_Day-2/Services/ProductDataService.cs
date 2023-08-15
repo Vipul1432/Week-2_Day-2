@@ -22,19 +22,26 @@ namespace Week_2_Day_2.Services
                 new Product { Id = 10, Name = "Wireless Earbuds", Price = 149.99M }
             };
         }
+        // it retun all list of products
         public List<Product> GetProducts()
         {
             return _products.ToList();
         }
+
+        // It return product by it's id
         public Product GetProductById(int id)
         {
             return _products.FirstOrDefault(p => p.Id == id)!;
         }
+
+        // It add a product to list
         public void AddProduct(Product product)
         {
             product.Id = _products.Max(p => p.Id) + 1;
             _products.Add(product);
         }
+
+        // It update a product from list 
         public void UpdateProduct(Product product)
         {
             var existingProduct = _products.FirstOrDefault(p => p.Id == product.Id);
@@ -45,6 +52,7 @@ namespace Week_2_Day_2.Services
             }
         }
 
+        // It delete a product from list
         public bool DeleteProduct(int id)
         {
             var productToDelete = _products.FirstOrDefault(p => p.Id == id);
