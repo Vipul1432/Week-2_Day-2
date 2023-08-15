@@ -1,3 +1,7 @@
+using Week_2_Day_2.Interfaces;
+using Week_2_Day_2.Repository;
+using Week_2_Day_2.Services;
+
 namespace Week_2_Day_2
 {
     public class Program
@@ -8,6 +12,10 @@ namespace Week_2_Day_2
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            // Dependency services
+            builder.Services.AddSingleton<IProductDataService, ProductDataService>();
+            builder.Services.AddSingleton<IProductRepository, ProductRepository>();
 
             var app = builder.Build();
 
