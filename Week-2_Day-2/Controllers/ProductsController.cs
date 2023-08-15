@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Week_2_Day_2.Interfaces;
 using Week_2_Day_2.Models;
+using Week_2_Day_2.ViewModels;
 
 namespace Week_2_Day_2.Controllers
 {
@@ -22,7 +23,12 @@ namespace Week_2_Day_2.Controllers
         public IActionResult Details(int id)
         {
             Product product = _productRepository.GetProductById(id);
-            return View(product);
+            ProductDetailsViewModel viewModel = new ProductDetailsViewModel
+            {
+                Product = product,
+                DisplayMessage = "Product details retrieved successfully."
+            };
+            return View(viewModel);
         }
 
         [HttpGet]
