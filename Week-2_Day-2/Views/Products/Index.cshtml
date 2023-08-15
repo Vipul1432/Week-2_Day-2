@@ -11,11 +11,12 @@
 <p>
     <a asp-action="Create" class="btn btn-sm btn-primary">Create New</a>
 </p>
+<partial name="_Notification"></partial>
 <table class="table table-bordered">
     <thead class="table-striped table-hover">
         <tr class="table-dark text-center">
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                S.No.
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
